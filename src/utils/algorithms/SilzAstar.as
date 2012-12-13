@@ -13,6 +13,8 @@ package utils.algorithms
 		import flash.geom.Rectangle;
 		import flash.utils.getTimer;
 		
+		import utils.configuration.MapContextConfig;
+		
 		public class SilzAstar{
 			
 			/**
@@ -81,14 +83,14 @@ package utils.algorithms
 			 */ 
 			public function find(xnow:uint,ynow:uint,xpos:uint,ypos:uint):Array {
 				//TODO:
-//				xpos = int(xpos / MapContextConfig.BlockSize.x);
-//				ypos = int(ypos / MapContextConfig.BlockSize.y);
-//				xpos = Math.min(xpos, _grid.numCols - 1);
-//				ypos = Math.min(ypos, _grid.numRows - 1);
-//				_grid.setEndNode(xpos, ypos);
-//				
-//				xnow = int(xnow / MapContextConfig.BlockSize.x);
-//				ynow = int(ynow / MapContextConfig.BlockSize.y);
+				xpos = int(xpos / MapContextConfig.BlockSize.x);
+				ypos = int(ypos / MapContextConfig.BlockSize.y);
+				xpos = Math.min(xpos, _grid.numCols - 1);
+				ypos = Math.min(ypos, _grid.numRows - 1);
+				_grid.setEndNode(xpos, ypos);
+				
+				xnow = int(xnow / MapContextConfig.BlockSize.x);
+				ynow = int(ynow / MapContextConfig.BlockSize.y);
 				_grid.setStartNode(xnow, ynow);
 				
 				if(isDisplayMode)
