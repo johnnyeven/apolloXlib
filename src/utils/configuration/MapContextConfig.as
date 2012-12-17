@@ -12,7 +12,7 @@ package utils.configuration
 		/**
 		 * 地图大小
 		 */
-		public static var MapSize: Point = new Point();
+		public static var MapSize: Point = new Point(1000, 600);
 		/**
 		 * 地图碎片大小
 		 */
@@ -24,11 +24,11 @@ package utils.configuration
 		/**
 		 * 寻路格子大小
 		 */
-		public static var BlockSize: Point = new Point();
+		public static var BlockSize: Point = new Point(50, 50);
 		/**
 		 * 寻路格子数量
 		 */
-		public static var BlockNum: Point = new Point();
+		public static var BlockNum: Point = new Point(20, 12);
 		
 		public function MapContextConfig() 
 		{
