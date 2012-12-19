@@ -43,7 +43,7 @@ package utils.resource
 			return _resource;
 		}
 		
-		public static function getResourceByLoader(url: String, className: String, callback: Function = null): DisplayObject
+		public static function getResourceByLoader(url: String, className: String, callback: Function = null, showProgressBar: Boolean = false): DisplayObject
 		{
 			var _resource: DisplayObject = getResourceFromPool(className);
 //			if(_resource == null)
@@ -66,7 +66,7 @@ package utils.resource
 				
 				if(_resourceLoadedIndex[url].length == 1)
 				{
-					ResourceLoadManager.load(url, true, "", onResourceLoaded, null, onResourceIOError);
+					ResourceLoadManager.load(url, showProgressBar, "", onResourceLoaded, null, onResourceIOError);
 				}
 //			}
 			return _resource;
