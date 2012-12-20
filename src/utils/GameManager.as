@@ -158,6 +158,11 @@ package utils
 		{
 			return _root;
 		}
+		
+		public function get backLayer(): Sprite
+		{
+			return _backLayer;
+		}
 
 		public function get baseLayer(): Sprite
 		{
