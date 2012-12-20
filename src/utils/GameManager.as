@@ -11,6 +11,7 @@ package utils
 	
 	public class GameManager extends Component
 	{
+		private var _backLayer: Sprite;
 		private var _baseLayer: Sprite;
 		private var _viewLayer: Sprite;
 		private var _popUpLayer: Sprite;
@@ -29,11 +30,13 @@ package utils
 				throw new IllegalOperationError("不能实例化GameManager类");
 			}
 			_instance = this;
+			_backLayer = new Sprite();
 			_baseLayer = new Sprite();
 			_viewLayer = new Sprite();
 			_popUpLayer = new Sprite();
 			_toolTipLayer = new Sprite();
 			_infoLayer = new Sprite();
+			addChild(_backLayer);
 			addChild(_baseLayer);
 			addChild(_viewLayer);
 			addChild(_popUpLayer);
@@ -51,6 +54,19 @@ package utils
 		protected function onStageResize(evt: Event): void
 		{
 			MenuManager.updateModeTransparencySize();
+		}
+		
+		public function addBack(target: DisplayObject): void
+		{
+			_backLayer.addChild(target);
+		}
+		
+		public function removeBack(target: DisplayObject): void
+		{
+			if(_backLayer.contains(target))
+			{
+				_backLayer.removeChild(target);
+			}
 		}
 		
 		public function addBase(target: DisplayObject): void
