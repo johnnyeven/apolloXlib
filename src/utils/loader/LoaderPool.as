@@ -79,11 +79,11 @@ package utils.loader
 			{
 				_loader = new ImageLoader(url);
 			}
-			else if(url.search(".swf"))
+			else if(url.search(".swf") != -1)
 			{
 				_loader = new ClassLoader(url);
 			}
-			else if(url.search(".xml"))
+			else if(url.search(".xml") != -1)
 			{
 				_loader = new XMLLoader(url);
 			}
