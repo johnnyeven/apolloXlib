@@ -40,6 +40,7 @@ package utils.resource
 				}
 				//_pool[className] = _resource;
 			}
+			_resource.cacheAsBitmap = true;
 			return _resource;
 		}
 		
