@@ -45,7 +45,7 @@ package utils.loader
 			{
 				_pool[_loader.name] = _loader;
 			}
-			else if(!StringUtils.empty(_loader.url))
+			if(!StringUtils.empty(_loader.url))
 			{
 				_pool[_loader.url] = _loader;
 			}
