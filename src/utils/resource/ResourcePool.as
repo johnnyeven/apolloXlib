@@ -31,6 +31,10 @@ package utils.resource
 				try
 				{
 					var _class: Class = getDefinitionByName(className) as Class;
+					if(_class == null)
+					{
+						return null;
+					}
 					_resource = new _class();
 				}
 				catch(err: Error)
