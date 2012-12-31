@@ -28,12 +28,12 @@ package utils
 		
 		private function onKeyDown(evt: KeyboardEvent): void
 		{
+			trace("HotkeyManager Info: Key down=" + keyCode);
 			var keyCode: int = evt.keyCode;
 			if(_hotkey[keyCode] != null)
 			{
 				Facade.getInstance().sendNotification(_hotkey[keyCode][0], _hotkey[keyCode][1]);
 			}
-			trace("HotkeyManager Info: Key down=" + keyCode);
 		}
 		
 		public static function get instance(): HotkeyManager
