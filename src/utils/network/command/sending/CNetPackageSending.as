@@ -1,11 +1,10 @@
 package utils.network.command.sending 
 {
+	import flash.utils.ByteArray;
+	
 	import utils.configuration.ConnectorContextConfig;
 	import utils.network.command.CCommandBase;
 	import utils.network.command.interfaces.INetPackageSending;
-	
-	import com.adobe.crypto.*;
-	import flash.net.URLVariables;
 	
 	/**
 	 * ...
@@ -13,10 +12,11 @@ package utils.network.command.sending
 	 */
 	public class CNetPackageSending extends CCommandBase implements INetPackageSending 
 	{
-		protected var _urlVariables: URLVariables;
+		protected var _byteArray: ByteArray;
 		
-		public function CNetPackageSending(controller: String, action: String) 
+		public function CNetPackageSending(controller: int, action: int) 
 		{
+			_byteArray = new ByteArray();
 			super(controller, action);
 		}
 		
@@ -24,32 +24,14 @@ package utils.network.command.sending
 		
 		public function fill(): void 
 		{
-			_urlVariables = new URLVariables();
-			_urlVariables.flag = flag;
-			_urlVariables.game_id = ConnectorContextConfig.GAME_ID;
-			_urlVariables.server_section = ConnectorContextConfig.SECTION_ID;
+			_byteArray.clear();
+			_byteArray.writeByte((controller << 4) | action);
 		}
-		
-		public function get urlVariables(): URLVariables 
+
+		public function get byteArray(): ByteArray
 		{
-			return _urlVariables;
+			return _byteArray;
 		}
-		
-		protected function generateCode(): void
-		{
-			CONFIG::DebugMode
-			{
-				trace('Please override generateCode()');
-			}
-		}
-		
-		protected function generateArrayCode(arr: Array): String
-		{
-			var originText: String = arr.join("|||");
-			originText += ("|||" + ConnectorContextConfig.AUTH_KEY);
-			return SHA1.hash(MD5.hash(originText));
-		}
-		
 	}
 
 }

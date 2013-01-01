@@ -1,13 +1,13 @@
 package utils.network 
 {
-	import utils.network.command.interfaces.*;
-	import utils.network.command.CCommandList;
-	import utils.network.command.sending.*;
-	import utils.network.http.CWebConnector;
-	
 	import flash.errors.IllegalOperationError;
 	import flash.geom.Point;
 	import flash.utils.ByteArray;
+	
+	import utils.network.command.CCommandList;
+	import utils.network.command.interfaces.*;
+	import utils.network.command.sending.*;
+	import utils.network.tcp.CNetSocket;
 	
 	/**
 	 * ...
@@ -15,7 +15,7 @@ package utils.network
 	 */
 	public class CCommandCenter extends CBaseCenter 
 	{
-		private var connector: CWebConnector;
+		private var connector: CNetSocket;
 		private var command: CCommandList;
 		private static var instance: CCommandCenter;
 		private static var allowInstance: Boolean = false;
@@ -28,7 +28,7 @@ package utils.network
 				throw new IllegalOperationError("CCommandCenter不允许实例化");
 			}
 			command = CCommandList.getInstance();
-			connector = CWebConnector.getInstance();
+			connector = CNetSocket.getInstance();
 			connector.addCallback(process);
 		}
 		
@@ -55,7 +55,7 @@ package utils.network
 		public function send(protocol: CNetPackageSending): void
 		{
 			protocol.fill();
-			connector.send(protocol.urlPath, protocol.urlVariables);
+			connector.send(protocol.byteArray);
 		}
 		
 		public static function getInstance(): CCommandCenter
@@ -69,5 +69,4 @@ package utils.network
 			return instance;
 		}
 	}
-
 }

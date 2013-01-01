@@ -7,8 +7,8 @@ package utils.network.command.interfaces
 	 */
 	public interface INetPackageProtocol 
 	{
-		function get controller(): String;
-		function get action(): String;
+		function get controller(): int;
+		function get action(): int;
 	}
 	
 }
