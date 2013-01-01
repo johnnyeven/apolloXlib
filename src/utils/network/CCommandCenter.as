@@ -32,7 +32,7 @@ package utils.network
 			connector.addCallback(process);
 		}
 		
-		private function process(flag: uint, data: Object): void
+		private function process(flag: uint, data: ByteArray): void
 		{
 			var protocol: INetPackageReceiving = command.getCommand(flag);
 			if (protocol != null)

@@ -1,7 +1,9 @@
 package utils.network.command.receiving 
 {
-	import utils.network.command.interfaces.INetPackageReceiving;
+	import flash.utils.ByteArray;
+	
 	import utils.network.command.CCommandBase;
+	import utils.network.command.interfaces.INetPackageReceiving;
 	
 	/**
 	 * ...
@@ -11,16 +13,17 @@ package utils.network.command.receiving
 	{
 		public var message: int;
 		
-		public function CNetPackageReceiving(controller: String, action: String) 
+		public function CNetPackageReceiving(controller: int, action: int) 
 		{
 			super(controller, action);
 		}
 		
 		/* INTERFACE INetPackageReceiving */
 		
-		public function fill(data: Object): void 
+		public function fill(bytes: ByteArray): void 
 		{
-			message = data.message;
+			message = bytes.readByte();
+			bytes.readShort();
 		}
 		
 	}
