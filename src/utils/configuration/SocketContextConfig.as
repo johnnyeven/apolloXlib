@@ -59,6 +59,7 @@ package utils.configuration
 		public static const ACTION_REGISTER_CHARACTER: int = 5;
 		public static const ACTION_INIT_CHARACTER: int = 6;
 		public static const ACTION_CHANGE_DIRECTION: int = 7;
+		public static const ACTION_QUICK_START: int = 8;
 		
 		public static const TYPE_INT: int = 0;
 		public static const TYPE_LONG: int = 1;

@@ -2,7 +2,6 @@ package utils.configuration
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Stage;
-	
 	import flash.errors.IllegalOperationError;
 	
 	/**
@@ -11,6 +10,7 @@ package utils.configuration
 	 */
 	public final class GlobalContextConfig 
 	{
+		public static var GameId: int = 1001;
 		public static var container: DisplayObjectContainer;
 		/**
 		 * 资源更新周期(秒)
