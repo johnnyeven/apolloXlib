@@ -10,6 +10,7 @@ package utils.network.command.interfaces
 	{
 		function fill(): void;
 		function get byteArray(): ByteArray;
+		function get protocolName(): String;
 	}
 	
 }

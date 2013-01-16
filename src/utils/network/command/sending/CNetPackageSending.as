@@ -32,6 +32,11 @@ package utils.network.command.sending
 		{
 			return _byteArray;
 		}
+		
+		public function get protocolName(): String
+		{
+			return "CNetPackageSending";
+		}
 	}
 
 }

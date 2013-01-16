@@ -56,6 +56,10 @@ package utils.network
 		{
 			protocol.fill();
 			connector.send(protocol.byteArray);
+			CONFIG::DebugMode
+			{
+				trace("[CommandCenter] <Send> : Name=" + protocol.protocolName);
+			}
 		}
 		
 		public static function getInstance(): CCommandCenter
