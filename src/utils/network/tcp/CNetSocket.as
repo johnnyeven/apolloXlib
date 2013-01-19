@@ -54,8 +54,10 @@ package utils.network.tcp
 			dataByte.endian = Endian.LITTLE_ENDIAN;
 			bytes.readBytes(dataByte, 0, packageLength);
 			
-			dataByte.readByte();	//调过success
-			var flag: int = dataByte.readShort();
+			var ack: int = dataByte.readByte();	//调过success
+			var controller: int = dataByte.readByte();
+			var action: int = dataByte.readByte();
+			var flag: int = (controller << 4) | action;
 			dataByte.position = 0;
 			
 			if (callback != null)
