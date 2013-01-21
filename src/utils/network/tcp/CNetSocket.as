@@ -55,9 +55,7 @@ package utils.network.tcp
 			bytes.readBytes(dataByte, 0, packageLength);
 			
 			var ack: int = dataByte.readByte();	//调过success
-			var controller: int = dataByte.readByte();
-			var action: int = dataByte.readByte();
-			var flag: int = (controller << 4) | action;
+			var flag: int = dataByte.readShort();
 			dataByte.position = 0;
 			
 			if (callback != null)
