@@ -2,6 +2,7 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="utils.HotkeyManager"/>
+    <classEntry path="utils.events.CommandEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

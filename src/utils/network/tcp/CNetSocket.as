@@ -90,6 +90,17 @@ package utils.network.tcp
 			}
 			return instance;
 		}
+		
+		public function dispose(): void
+		{
+			if(connected)
+			{
+				close();
+			}
+			removeEventListener(ProgressEvent.SOCKET_DATA, onSocketData);
+			callback = null;
+			instance = null;
+		}
 	}
 
 }

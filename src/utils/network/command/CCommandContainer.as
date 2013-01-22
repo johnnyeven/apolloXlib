@@ -29,6 +29,11 @@ package utils.network.command
 			}
 			return null;
 		}
+		
+		public function dispose(): void
+		{
+			commandList = null;
+		}
 	}
 
 }
