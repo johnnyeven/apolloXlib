@@ -7,6 +7,8 @@ package utils.network
 	import flash.geom.Point;
 	import flash.utils.ByteArray;
 	
+	import utils.DebugUtils;
+	import utils.enum.DebugLogType;
 	import utils.events.CommandEvent;
 	import utils.network.command.CCommandList;
 	import utils.network.command.interfaces.*;
@@ -34,6 +36,7 @@ package utils.network
 			command = CCommandList.getInstance();
 			connector = CNetSocket.getInstance();
 			connector.addCallback(process);
+			initialization();
 		}
 		
 		public function initialization(): void
@@ -46,23 +49,26 @@ package utils.network
 		
 		private function onClosed(event: Event): void
 		{
-			trace("服务器连接已断开");
+			DebugUtils.log(this, DebugLogType.INFORMATION, "服务器连接已断开");
+			dispatchEvent(new CommandEvent(CommandEvent.CLOSED_EVENT));
 		}
 		
 		private function onConnected(event: Event): void
 		{
-			trace("服务器已连接");
+			DebugUtils.log(this, DebugLogType.INFORMATION, "服务器已连接");
 			dispatchEvent(new CommandEvent(CommandEvent.CONNECTED_EVENT));
 		}
 		
 		private function onIOError(event: IOErrorEvent): void
 		{
-			trace("无法连接至服务器");
+			DebugUtils.log(this, DebugLogType.INFORMATION, "无法连接至服务器");
+			dispatchEvent(new CommandEvent(CommandEvent.IOERROR_EVENT));
 		}
 		
 		private function onSecurityError(event: SecurityErrorEvent): void
 		{
-			trace("安全沙箱冲突");
+			DebugUtils.log(this, DebugLogType.INFORMATION, "安全沙箱冲突");
+			dispatchEvent(new CommandEvent(CommandEvent.SECURITYERROR_EVENT));
 		}
 		
 		public function connect(host: String, port: int): void
@@ -96,7 +102,7 @@ package utils.network
 			connector.send(protocol.byteArray);
 			CONFIG::DebugMode
 			{
-				trace("[CommandCenter] <Send> : Name=" + protocol.protocolName);
+				DebugUtils.log(this, DebugLogType.INFORMATION, "Send Package: " + protocol.protocolName);
 			}
 		}
 		

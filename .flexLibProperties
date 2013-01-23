@@ -3,6 +3,9 @@
   <includeClasses>
     <classEntry path="utils.HotkeyManager"/>
     <classEntry path="utils.events.CommandEvent"/>
+    <classEntry path="utils.DebugUtils"/>
+    <classEntry path="utils.ClassUtils"/>
+    <classEntry path="utils.enum.DebugLogType"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
