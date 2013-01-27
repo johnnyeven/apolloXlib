@@ -9,7 +9,16 @@ package utils
 		public static function log(target: *, type: String, message: String): void
 		{
 			var className: String = ClassUtils.getClassName(target);
-			trace("[" + className + "] <" + type + "> " + message);
+			var currentTime: Date = new Date();
+			trace(
+				"[" + currentTime.fullYear + "-" +
+				(currentTime.month+1) + "-" +
+				currentTime.date + " " +
+				currentTime.hours + ":" +
+				currentTime.minutes + ":" +
+				currentTime.seconds + " " +
+				className +
+				"] <" + type + "> " + message);
 		}
 	}
 }
