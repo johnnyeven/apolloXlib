@@ -47,6 +47,12 @@ package utils.network.command
 			}
 			return instance;
 		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			instance = null;
+		}
 	}
 
 }

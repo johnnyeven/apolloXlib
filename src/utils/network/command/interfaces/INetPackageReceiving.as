@@ -1,5 +1,6 @@
 package utils.network.command.interfaces 
 {
+	import flash.utils.ByteArray;
 	
 	/**
 	 * ...
@@ -7,7 +8,7 @@ package utils.network.command.interfaces
 	 */
 	public interface INetPackageReceiving 
 	{
-		function fill(data: Object): void;
+		function fill(bytes: ByteArray): void;
 	}
 	
 }

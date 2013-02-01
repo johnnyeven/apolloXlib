@@ -1,6 +1,6 @@
 package utils.network.command.interfaces 
 {
-	import flash.net.URLVariables;
+	import flash.utils.ByteArray;
 	
 	/**
 	 * ...
@@ -9,7 +9,8 @@ package utils.network.command.interfaces
 	public interface INetPackageSending 
 	{
 		function fill(): void;
-		function get urlVariables(): URLVariables;
+		function get byteArray(): ByteArray;
+		function get protocolName(): String;
 	}
 	
 }
