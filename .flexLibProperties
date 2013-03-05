@@ -6,6 +6,7 @@
     <classEntry path="utils.DebugUtils"/>
     <classEntry path="utils.ClassUtils"/>
     <classEntry path="utils.enum.DebugLogType"/>
+    <classEntry path="utils.graphics.GraphicResource"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
