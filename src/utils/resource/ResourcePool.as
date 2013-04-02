@@ -42,7 +42,7 @@ package utils.resource
 					//Is BitmapData
 					_resource = new Bitmap(new _class(0, 0) as BitmapData)
 				}
-				//_pool[className] = _resource;
+				_pool[className] = _resource;
 			}
 			_resource.cacheAsBitmap = true;
 			return _resource;
