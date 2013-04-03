@@ -10,6 +10,8 @@ package utils.resource
 	
 	import utils.StringUtils;
 	import utils.events.LoaderEvent;
+	import utils.loader.ItemLoader;
+	import utils.loader.LoaderPool;
 	import utils.loader.ResourceLoadManager;
 	import utils.parameters.ResourcePoolLoaderParameter;
 
@@ -25,9 +27,10 @@ package utils.resource
 		
 		public static function getResource(className: String): DisplayObject
 		{
-			var _resource: DisplayObject = getResourceFromPool(className);
-			if(_resource == null)
-			{
+			var _resource: DisplayObject;
+//			var _resource: DisplayObject = getResourceFromPool(className);
+//			if(_resource == null)
+//			{
 				try
 				{
 					var _class: Class = getDefinitionByName(className) as Class;
@@ -42,39 +45,40 @@ package utils.resource
 					//Is BitmapData
 					_resource = new Bitmap(new _class(0, 0) as BitmapData)
 				}
-				_pool[className] = _resource;
-			}
+//				_pool[className] = _resource;
+//			}
 			_resource.cacheAsBitmap = true;
 			return _resource;
 		}
 		
-		public static function getResourceByLoader(url: String, className: String, callback: Function = null, showProgressBar: Boolean = false): DisplayObject
+		public static function getResourceByLoader(url: String, className: String, onComplete: Function = null, onProgress: Function = null, onIOError: Function = null, showProgressBar: Boolean = false): void
 		{
+			if(StringUtils.empty(url))
+			{
+				return;
+			}
+			if(_resourceLoadedIndex[url] == null)
+			{
+				_resourceLoadedIndex[url] = new Array();
+			}
+			var _parameter: ResourcePoolLoaderParameter = new ResourcePoolLoaderParameter();
+			_parameter.url = url;
+			_parameter.className = className;
+			_parameter.displayObject = new Sprite();
+			_parameter.onComplete = onComplete;
+			_resourceLoadedIndex[url].push(_parameter);
+			
 			var _resource: DisplayObject = getResourceFromPool(className);
-//			if(_resource == null)
-//			{
-				if(StringUtils.empty(url))
-				{
-					return null;
-				}
-				
-				if(_resourceLoadedIndex[url] == null)
-				{
-					_resourceLoadedIndex[url] = new Array();
-				}
-				var _parameter: ResourcePoolLoaderParameter = new ResourcePoolLoaderParameter();
-				_parameter.url = url;
-				_parameter.className = className;
-				_parameter.displayObject = new Sprite();
-				_parameter.callback = callback;
-				_resourceLoadedIndex[url].push(_parameter);
-				
-				if(_resourceLoadedIndex[url].length == 1)
-				{
+			if(_resource == null)
+			{
+//				if(_resourceLoadedIndex[url].length == 1)
+//				{
 					ResourceLoadManager.load(url, showProgressBar, "", onResourceLoaded, null, onResourceIOError);
-				}
-//			}
-			return _resource;
+					return;
+//				}
+			}
+			var _loader: ItemLoader = LoaderPool.instance.initLoader(url);
+			onResourceLoaded(new LoaderEvent(LoaderEvent.COMPLETE, _loader, _loader.bytesLoaded, _loader.bytesTotal));
 		}
 		
 		private static function onResourceLoaded(evt: LoaderEvent): void
@@ -90,18 +94,25 @@ package utils.resource
 				for each(var _parameter: ResourcePoolLoaderParameter in _parameterArray)
 				{
 					_class = getDefinitionByName(_parameter.className) as Class;
-					_display = new _class();
-					_pool[_parameter.className] = _display;
-					if(_parameter.callback != null)
+					try
 					{
-						_parameter.callback(_display);
+						_display = new _class();
+					}
+					catch (err: Error)
+					{
+						_display = new Bitmap(new _class(0, 0) as BitmapData);
+						_pool[_parameter.className] = (_display as Bitmap).bitmapData;
+					}
+					if(_parameter.onComplete != null)
+					{
+						_parameter.onComplete(_display);
 						_parameter.displayObject = null;
 					}
 					else
 					{
 						_parameter.displayObject.addChild(_display);
 					}
-					_parameter.callback = null;
+					_parameter.onComplete = null;
 				}
 				delete _resourceLoadedIndex[_name];
 				delete _resourceLoadedIndex[_url];
