@@ -12,7 +12,7 @@ package utils.configuration
 		/**
 		 * 帐号服务器IP
 		 */
-		public static var login_ip: String = 'johnnyeven.3322.org';
+		public static var login_ip: String = 'server.profzone.net';
 		/**
 		 * 帐号服务器端口
 		 */
